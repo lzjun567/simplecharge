@@ -4,7 +4,9 @@ from django.db import models
 from datetime import datetime
 from django.contrib import admin
 from django.contrib.admin import DateFieldListFilter
-
+from django.contrib.admin.views.main import ChangeList
+from django.db.models import Sum,Avg
+from mychangelist import TotalAveragesChangeList
 # Create your models here.
 
 class Charge(models.Model):
@@ -15,11 +17,15 @@ class Charge(models.Model):
     add_date = models.DateTimeField(default=datetime.now(),verbose_name=u"添加日期")
 
 
+
 class ChargeAdmin(admin.ModelAdmin):
     list_display = ('amount','usage','add_date')
     search_fields = ('usage',)
     list_filter  = (('add_date',DateFieldListFilter),)
     #change_list_template = 'extras/change_form.html'
+
+    def get_changelist(self,request,**kwarge):
+        return TotalAveragesChangeList
 
 
 
