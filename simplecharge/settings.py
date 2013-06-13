@@ -66,6 +66,7 @@ STATIC_ROOT = ''
 # URL prefix for static files.
 # Example: "http://example.com/static/", "http://static.example.com/"
 STATIC_URL = '/static/'
+STATIC_PATH = './medias/'
 
 # Additional locations of static files
 STATICFILES_DIRS = (
@@ -109,6 +110,7 @@ ROOT_URLCONF = 'simplecharge.urls'
 WSGI_APPLICATION = 'simplecharge.wsgi.application'
 
 TEMPLATE_DIRS = (
+    'templates',
     # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.

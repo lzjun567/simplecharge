@@ -1,0 +1,44 @@
+<html>
+<head>
+<script src="/site_media/jquery-1.9.1.min.js"></script>
+<script>
+
+    $(function(){
+       $('.username').change(function(){
+            var username = $(this).find('option:selected').val()
+            $.ajax({
+                url:"stat",
+                type:'GET',
+                data:{'username':username},
+                dataType:'html',
+                success:function(data){
+                $("tr").next().remove();
+                $("tr").after(data);
+                }
+            });
+       
+       }); 
+    });
+
+</script>
+</head>
+    <body>
+        
+       <select class='username'>
+        <option value="zhangsan">--------</option>  
+        {% for user in users %}
+        <option value={{user.username}}>{{user.last_name}}{{user.first_name}}</option>
+        {% endfor %}
+       </select> 
+        <div id="data">
+       <table>
+            <tr>
+                <th>消费金额</th>
+                <th>消费日期</th>
+                <th>用途</th>
+            </tr>
+       </table>
+        </div>
+    </body>
+
+</html>

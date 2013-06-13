@@ -1,0 +1,13 @@
+           {% for charge in charges %}
+            <tr>
+                <td>{{charge.amount}}</td>
+                <td>{{charge.add_date|date:"Y-m-d"}}</td>
+                <td>{{charge.usage}}</td>
+            </tr>
+            {% endfor %}
+            
+            <tr>
+            <td><span>SUM:{{sum_amount.amount__sum}}</span></td>
+            <td><span>AVG:{{avg_amount.amount__avg}}</span></td>
+            <td></td>
+            </tr>
