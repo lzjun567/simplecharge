@@ -22,11 +22,14 @@ class Charge(models.Model):
 	#app_label = u'账单'
 
 
+def user_unicode(self):
+    return u'%s%s'%(self.last_name,self.first_name)
 
+User.__unicode__ = user_unicode
 
 class ChargeAdmin(admin.ModelAdmin):
     exclude = ('owner',)
-    search_fields = ('owner__username','usage',)
+    search_fields = ('owner__first_name','owner__last_name','usage',)
     list_filter  = (('add_date',DateFieldListFilter),)
 
     def save_model(self,request,charge,form,change):
@@ -35,15 +38,19 @@ class ChargeAdmin(admin.ModelAdmin):
     def view_link(self,obj):
        return u'<a href="http://www.baidu.com">baidu</a>'
 
+    def format_date(self,obj):
+        return obj.add_date.strftime('%Y-%m-%d %H:%M %z')
+
+    format_date.short_description = 'Date'
+
     view_link.allow_tags = True
     view_link.short_description="foo"
-    list_display = ('owner','amount','usage','add_date',)
+    list_display = ('owner','amount','usage','format_date',)
 
     #change_list_template = 'extras/change_form.html'
 
    # def get_changelist(self,request,**kwarge):
    #     return TotalAveragesChangeList
-
 
 
 admin.site.register(Charge,ChargeAdmin)
