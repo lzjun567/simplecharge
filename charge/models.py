@@ -11,25 +11,34 @@ from django.contrib.auth.models import User
 # Create your models here.
 
 class Charge(models.Model):
-    amount = models.DecimalField(max_digits=3,decimal_places=1,\
+    amount = models.DecimalField(max_digits=4,decimal_places=1,\
     verbose_name=u"消费金额",default=0)
     usage = models.CharField(max_length=50,default=u"吃饭",\
     verbose_name=u"用途")
-    add_date = models.DateTimeField(default=datetime.now(),verbose_name=u"添加日期")
-    owner = models.ForeignKey(User)
+    add_date = models.DateTimeField(default=datetime.now,verbose_name=u"添加日期")
+    owner = models.ForeignKey(User,verbose_name=u"消费人")
+    
+    #class Meta:
+	#app_label = u'账单'
 
 
 
 
 class ChargeAdmin(admin.ModelAdmin):
     exclude = ('owner',)
-    list_display = ('owner','amount','usage','add_date')
-    search_fields = ('usage',)
+    search_fields = ('owner__username','usage',)
     list_filter  = (('add_date',DateFieldListFilter),)
 
     def save_model(self,request,charge,form,change):
        charge.owner = request.user
        charge.save()
+    def view_link(self,obj):
+       return u'<a href="http://www.baidu.com">baidu</a>'
+
+    view_link.allow_tags = True
+    view_link.short_description="foo"
+    list_display = ('owner','amount','usage','add_date',)
+
     #change_list_template = 'extras/change_form.html'
 
    # def get_changelist(self,request,**kwarge):

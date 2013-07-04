@@ -1,0 +1,45 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<title>Insert title here</title>
+		<script type="text/javascript">
+	var managerSrcTmp;
+	function managerClick(){
+		var $statistics = $('statisticsFrame');
+		var $manager = $('managerFrame');
+		hide($statistics);
+		show($manager);
+		//$statistics.src=managerSrcTmp?managerSrcTmp:"http://192.168.0.62:80/admin/";
+	}
+	function statisticsClick(){
+		//var src = $('iframeId').src;
+		//if(src.indexOf('admin')>0){
+		//	managerSrcTmp = $('iframeId').src
+		//}
+		var $statistics = $('statisticsFrame');
+		var $manager = $('managerFrame');
+		show($statistics);
+		hide($manager);
+		$statistics.src="http://192.168.0.62:82/cardmanager/";
+	}
+	function $(id){
+		return document.getElementById(id);
+	}
+	function show(e){
+		e.style.display = 'block';
+	}
+	function hide(e){
+		e.style.display = 'none';
+	}
+</script>
+	</head>
+	<body>
+		<div>
+			<a href="javascript:;" onclick="managerClick();">管理页面</a>&nbsp;&nbsp;|&nbsp;&nbsp;
+			<a href="javascript:;" onclick="statisticsClick();">统计首页</a>
+		</div>
+		<iframe id="managerFrame" src="http://192.168.0.62:80/admin/" height="550px" width="100%" style="display:none;"></iframe>
+		<iframe id="statisticsFrame" src="http://192.168.0.62:82/cardmanager/" height="550px" width="100%"></iframe>
+	</body>
+</html>

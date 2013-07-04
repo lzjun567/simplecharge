@@ -1,5 +1,5 @@
 # Django settings for simplecharge project.
-
+import time
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 
@@ -15,7 +15,7 @@ DATABASES = {
         'NAME': 'simplecharge',                      # Or path to database file if using sqlite3.
         # The following settings are not used with sqlite3:
         'USER': 'root',
-        'PASSWORD': 'root',
+        'PASSWORD': 'cloud',
         'HOST': '',                      # Empty for localhost through domain sockets or '127.0.0.1' for localhost through TCP.
         'PORT': '',                      # Set to empty string for default.
     }
@@ -29,7 +29,9 @@ ALLOWED_HOSTS = []
 # http://en.wikipedia.org/wiki/List_of_tz_zones_by_name
 # although not all choices may be available on all operating systems.
 # In a Windows environment this must be set to your system time zone.
-TIME_ZONE = 'America/Chicago'
+#TIME_ZONE = 'America/Chicago'
+USE_TZ = False
+TIME_ZONE = 'Etc/GMT%+-d'%(time.timezone/3600)
 
 # Language code for this installation. All choices can be found here:
 # http://www.i18nguy.com/unicode/language-identifiers.html
@@ -66,7 +68,7 @@ STATIC_ROOT = ''
 # URL prefix for static files.
 # Example: "http://example.com/static/", "http://static.example.com/"
 STATIC_URL = '/static/'
-STATIC_PATH = './medias/'
+STATIC_PATH = '/srv/www/simplecharge/medias/'
 
 # Additional locations of static files
 STATICFILES_DIRS = (
@@ -110,7 +112,7 @@ ROOT_URLCONF = 'simplecharge.urls'
 WSGI_APPLICATION = 'simplecharge.wsgi.application'
 
 TEMPLATE_DIRS = (
-    'templates',
+    '/srv/www/simplecharge/templates',
     # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.

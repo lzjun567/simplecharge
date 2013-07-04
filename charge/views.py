@@ -4,6 +4,9 @@ from django.contrib.auth.models import User
 from charge.models import Charge
 from django.db.models import Sum,Avg
 
+
+def home(request):
+    return render_to_response('index.html',{})
 def index(request):
 
     username = request.GET.get('username')
@@ -31,7 +34,7 @@ def stat(request):
         user = User.objects.get(username=username)
         charges = Charge.objects.filter(owner=user)
         sum_amount = Charge.objects.filter(owner=user).aggregate(Sum('amount'))
-        avg_amount  = Charge.objects.aggregate(Avg('amount'))
+        avg_amount  = Charge.objects.filter(owner=user).aggregate(Avg('amount'))
         print sum_amount
         print type(sum_amount)
 
