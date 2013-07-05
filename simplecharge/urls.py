@@ -18,5 +18,6 @@ urlpatterns = patterns('',
     url(r'^index/$',index),
     url(r'^$',home),
     url(r'^index/stat/$',stat),
+    url(r'^chihuo/$',chihuo),
     url(r'^site_media/(?P<path>.*)$','django.views.static.serve',{'document_root':settings.STATIC_PATH}),
 )

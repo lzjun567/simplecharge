@@ -2,7 +2,7 @@
 from django.shortcuts import render_to_response
 from django.contrib.auth.models import User
 from charge.models import Charge
-from django.db.models import Sum,Avg
+from django.db.models import Sum,Avg,Max
 
 
 def home(request):
@@ -44,3 +44,10 @@ def stat(request):
         'sum_amount':sum_amount,
         'avg_amount':avg_amount,
     })
+def chihuo(request):
+    
+    max_amount = Charge.objects.all().aggregate(Max('amount'))['amount__max']
+    charge = Charge.objects.filter(amount=max_amount)
+    print charge
+
+    return render_to_response('chihuo.html',{'charges':charge})

@@ -8,9 +8,19 @@
 	function managerClick(){
 		var $statistics = $('statisticsFrame');
 		var $manager = $('managerFrame');
+		var $chihuo = $('chihuoFrame');
+		hide($chihuo);
 		hide($statistics);
 		show($manager);
 		//$statistics.src=managerSrcTmp?managerSrcTmp:"http://192.168.0.62:80/admin/";
+	}
+	function chihuoClick(){
+		var $statistics = $('statisticsFrame');
+		var $manager = $('managerFrame');
+		var $chihuo = $('chihuoFrame');
+		hide($statistics);
+		hide($manager);
+		show($chihuo);
 	}
 	function statisticsClick(){
 		//var src = $('iframeId').src;
@@ -19,6 +29,8 @@
 		//}
 		var $statistics = $('statisticsFrame');
 		var $manager = $('managerFrame');
+		var $chihuo = $('chihuoFrame');
+		hide($chihuo);
 		show($statistics);
 		hide($manager);
 		$statistics.src="http://192.168.0.62:82/cardmanager/";
@@ -37,9 +49,11 @@
 	<body>
 		<div>
 			<a href="javascript:;" onclick="managerClick();">管理页面</a>&nbsp;&nbsp;|&nbsp;&nbsp;
-			<a href="javascript:;" onclick="statisticsClick();">统计首页</a>
+			<a href="javascript:;" onclick="statisticsClick();">统计首页</a>&nbsp;&nbsp;|&nbsp;&nbsp;
+		       <!-- <a href="javascript:;" onclick="chihuoClick()">今日吃货</a>-->
 		</div>
 		<iframe id="managerFrame" src="http://192.168.0.62:80/admin/" height="550px" width="100%" style="display:none;"></iframe>
 		<iframe id="statisticsFrame" src="http://192.168.0.62:82/cardmanager/" height="550px" width="100%"></iframe>
+		<iframe id="chihuoFrame" src="http://192.168.0.62/chihuo/" height="550px" width="100%" style="display:none"></iframe>
 	</body>
 </html>
